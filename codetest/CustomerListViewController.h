@@ -12,7 +12,5 @@
 
 @interface CustomerListViewController : UITableViewController
 
-@property (nonatomic, copy) NSMutableArray* (^retrieveDataBlock)(FIRDataSnapshot * snapshot);
-
 @end
 

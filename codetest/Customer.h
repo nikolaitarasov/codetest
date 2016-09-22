@@ -18,10 +18,6 @@
 @property(strong,nonatomic) NSString* dateOfBirth;
 @property(strong,nonatomic) NSString* zipcode;
 
-@property(strong,nonatomic) NSDictionary* customers;
-
-@property(retain,nonatomic) FIRDatabaseReference* customerRef;
-
 -(id) initWithCustomerKey:(NSString*) customerKey andDictionary:(NSDictionary*) customersDictionary;
 
 @end

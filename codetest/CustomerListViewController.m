@@ -6,7 +6,6 @@
 //  Copyright © 2016 Nikolai Tarasov. All rights reserved.
 //
 
-#import <CoreText/CTStringAttributes.h>
 #import "CustomerListViewController.h"
 #import "LaunchViewController.h"
 #import "AddNewCustomerTableViewController.h"
@@ -21,7 +20,6 @@
 
 @implementation CustomerListViewController
 
-Customer* customer;
 FIRDatabaseReference* databaseRef;
 NSMutableArray* customers;
 
@@ -39,6 +37,7 @@ NSMutableArray* customers;
     // init results array
     customers = [[NSMutableArray alloc] init];
     
+    // get all data from Firebase
     [[databaseRef child:@"customers"] observeSingleEventOfType:FIRDataEventTypeValue
                                                      withBlock:^(FIRDataSnapshot * snapshot) {
         
@@ -103,6 +102,9 @@ NSMutableArray* customers;
     [super didReceiveMemoryWarning];
 }
 
+
+#pragma mark - UITableViewDataSource
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -126,24 +128,6 @@ NSMutableArray* customers;
     return cell;
 }
 
-#pragma mark - UITableViewDataSource
-
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Customer* customer = [customers objectAtIndex:indexPath.row];
-    
-    NSString* firstName = customer.firstName;
-    NSString* lastName = customer.lastName;
-    NSString* dateOfBirth = customer.dateOfBirth;
-    NSString* zipcode = customer.zipcode;
-    NSString* key = customer.customerKey;
-    
-    NSString* fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
-    
-    AddNewCustomerTableViewController* vc = [[AddNewCustomerTableViewController alloc] initWithFirstName:firstName lastName:lastName dateOfBirth:dateOfBirth zipcode:zipcode key:key title:fullName];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
@@ -152,7 +136,7 @@ NSMutableArray* customers;
         
         // Remove data from database
         [[[databaseRef child:@"customers"] child:key] removeValue];
-
+        
         // Remove the row from data array
         [customers removeObjectAtIndex:indexPath.row];
         
@@ -173,6 +157,24 @@ NSMutableArray* customers;
             });
         });
     }
+}
+
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Customer* customer = [customers objectAtIndex:indexPath.row];
+    
+    NSString* firstName = customer.firstName;
+    NSString* lastName = customer.lastName;
+    NSString* dateOfBirth = customer.dateOfBirth;
+    NSString* zipcode = customer.zipcode;
+    NSString* key = customer.customerKey;
+    
+    NSString* fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+    
+    AddNewCustomerTableViewController* vc = [[AddNewCustomerTableViewController alloc] initWithFirstName:firstName lastName:lastName dateOfBirth:dateOfBirth zipcode:zipcode key:key title:fullName];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Private methods

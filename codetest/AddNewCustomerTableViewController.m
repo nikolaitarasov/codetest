@@ -121,6 +121,105 @@
     return NO;
 }
 
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if ([textField isEqual:self.firstNameField]) {
+        [self.lastNameField becomeFirstResponder];
+        [self.firstNameField resignFirstResponder];
+    } else if ([textField isEqual:self.lastNameField]) {
+        [self.dateOfBirthField becomeFirstResponder];
+        [self.lastNameField resignFirstResponder];
+    } else if ([textField isEqual:self.dateOfBirthField]) {
+        [self.zipcodeField becomeFirstResponder];
+        [self.dateOfBirthField resignFirstResponder];
+    } else {
+        [self.zipcodeField resignFirstResponder];
+    }
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    textField.placeholder = @"";
+    self.saveButton.enabled = NO;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    int textSize;
+    if ([textField isEqual:self.zipcodeField]) {
+        textSize = 5;
+    } else if ([textField isEqual:self.dateOfBirthField]) {
+        textSize = 10;
+    } else {
+        return YES;
+    }
+    if (textField.text.length < textSize) {
+        return NO;
+    }
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    NSString* firstName = self.firstNameField.text;
+    NSString* lastName = self.lastNameField.text;
+    self.title = [firstName stringByAppendingString:[@" " stringByAppendingString: lastName]];
+    if (self.firstNameField.text.length <= 0
+        && self.lastNameField.text.length <= 0) {
+        self.title = @"Add new customer";
+    }
+    if (self.firstNameField.text.length > 0
+        && self.lastNameField.text.length > 0
+        && self.dateOfBirthField.text.length > 0
+        && self.zipcodeField.text.length > 0) {
+        self.saveButton.enabled = YES;
+    } else {
+        self.saveButton.enabled = NO;
+    }
+    if (textField.text.length <= 0) {
+        if ([textField isEqual:self.dateOfBirthField]) {
+            textField.placeholder = @"Ex. mm-dd-yyyy";
+        } else if ([textField isEqual:self.zipcodeField]) {
+            textField.placeholder = @"Ex. 12345";
+        }
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    int textSize = 16; // by default
+    
+    if ([textField isEqual:self.zipcodeField]) {
+        textSize = 5;
+        NSCharacterSet *validationSet = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+        NSRange r = [string rangeOfCharacterFromSet:validationSet];
+        if (r.location != NSNotFound) {
+            NSLog(@"the string contains illegal characters");
+            return NO;
+        }
+    }
+    
+    if ([textField isEqual:self.dateOfBirthField]) {
+        textSize = 10;
+        NSCharacterSet *validationSet = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+        NSRange r = [string rangeOfCharacterFromSet:validationSet];
+        if (r.location != NSNotFound) {
+            NSLog(@"the string contains illegal characters");
+            return NO;
+        }
+        if (range.location == 2 || range.location == 5) {
+            NSString *str  = [NSString stringWithFormat:@"%@-",textField.text];
+            textField.text = str;
+        }
+    }
+    
+    if(range.length + range.location > textField.text.length){
+        return NO;
+    }
+    return newLength <= textSize;
+}
+
+
 #pragma mark - Private methods
 
 - (NSMutableArray*) createNameFields {
@@ -238,105 +337,6 @@
     NSUInteger index = [self.navigationController.viewControllers indexOfObject:self];
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index - 1] animated:YES];
 }
-
-#pragma mark - UITextFieldDelegate
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if ([textField isEqual:self.firstNameField]) {
-        [self.lastNameField becomeFirstResponder];
-        [self.firstNameField resignFirstResponder];
-    } else if ([textField isEqual:self.lastNameField]) {
-        [self.dateOfBirthField becomeFirstResponder];
-        [self.lastNameField resignFirstResponder];
-    } else if ([textField isEqual:self.dateOfBirthField]) {
-        [self.zipcodeField becomeFirstResponder];
-        [self.dateOfBirthField resignFirstResponder];
-    } else {
-        [self.zipcodeField resignFirstResponder];
-    }
-    return YES;
-}
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    textField.placeholder = @"";
-    self.saveButton.enabled = NO;
-}
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    int textSize;
-    if ([textField isEqual:self.zipcodeField]) {
-        textSize = 5;
-    } else if ([textField isEqual:self.dateOfBirthField]) {
-        textSize = 10;
-    } else {
-        return YES;
-    }
-    if (textField.text.length < textSize) {
-        return NO;
-    }
-    return YES;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    NSString* firstName = self.firstNameField.text;
-    NSString* lastName = self.lastNameField.text;
-    self.title = [firstName stringByAppendingString:[@" " stringByAppendingString: lastName]];
-    if (self.firstNameField.text.length <= 0
-        && self.lastNameField.text.length <= 0) {
-        self.title = @"Add new customer";
-    }
-    if (self.firstNameField.text.length > 0
-        && self.lastNameField.text.length > 0
-        && self.dateOfBirthField.text.length > 0
-        && self.zipcodeField.text.length > 0) {
-       self.saveButton.enabled = YES;
-    } else {
-        self.saveButton.enabled = NO;
-    }
-    if (textField.text.length <= 0) {
-        if ([textField isEqual:self.dateOfBirthField]) {
-            textField.placeholder = @"Ex. mm-dd-yyyy";
-        } else if ([textField isEqual:self.zipcodeField]) {
-            textField.placeholder = @"Ex. 12345";
-        }
-    }
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    NSUInteger newLength = [textField.text length] + [string length] - range.length;
-    int textSize = 16; // by default
-    
-    if ([textField isEqual:self.zipcodeField]) {
-        textSize = 5;
-        NSCharacterSet *validationSet = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-        NSRange r = [string rangeOfCharacterFromSet:validationSet];
-        if (r.location != NSNotFound) {
-            NSLog(@"the string contains illegal characters");
-            return NO;
-        }
-    }
-    
-    if ([textField isEqual:self.dateOfBirthField]) {
-        textSize = 10;
-        NSCharacterSet *validationSet = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-            NSRange r = [string rangeOfCharacterFromSet:validationSet];
-            if (r.location != NSNotFound) {
-                NSLog(@"the string contains illegal characters");
-                return NO;
-            }
-        if (range.location == 2 || range.location == 5) {
-            NSString *str  = [NSString stringWithFormat:@"%@-",textField.text];
-            textField.text = str;
-        }
-    }
-    
-    if(range.length + range.location > textField.text.length){
-        return NO;
-    }
-    return newLength <= textSize;
-}
-
-
 
 
 @end

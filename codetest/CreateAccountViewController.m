@@ -52,61 +52,6 @@ static NSString* retypePasswordPlaceholder = @"Retype password";
     [super didReceiveMemoryWarning];
 }
 
-- (void) doneAction:(UIButton*) button {
-    
-    if (self.nameField.text.length <= 0
-        || self.emailField.text.length <= 0
-        || self.passwordField.text.length <= 0
-        || self.retypePasswordField.text.length <= 0) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
-                                                                       message:@"All fields are required!"
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:nil];
-        [alert addAction:actionOk];
-        [self presentViewController:alert animated:YES completion:nil];
-        self.doneButton.enabled = NO;
-        return;
-    }
-    
-    // create ui activity indicator
-    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    [self.view addSubview:activityIndicator];
-    
-    // Create new user
-    [[FIRAuth auth] createUserWithEmail:self.emailField.text
-                           password:self.passwordField.text
-                         completion:^(FIRUser *user, NSError *error) {
-                             
-        [activityIndicator startAnimating];
-        
-        if (!error) {
-            [activityIndicator stopAnimating];
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Success!"
-                                                                           message:@"Your account is created"
-                                                                    preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                               style:UIAlertActionStyleDefault
-                                                             handler:^(UIAlertAction * action){
-            CustomerListViewController* vc = [[CustomerListViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];}];
-            [alert addAction:actionOk];
-            [self presentViewController:alert animated:YES completion:nil];
-        } else {
-            [activityIndicator stopAnimating];
-            UIAlertController *alert = [UIAlertController
-                                        alertControllerWithTitle:@"Failed"
-                                                         message:[error localizedDescription]
-                                                  preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                               style:UIAlertActionStyleDefault
-                                                             handler:nil];
-            [alert addAction:actionOk];
-            [self presentViewController:alert animated:YES completion:nil];
-        }
-    }];
-}
 
 #pragma mark - UITableViewDataSource
 
@@ -300,5 +245,61 @@ static NSString* retypePasswordPlaceholder = @"Retype password";
     return self.UIElements;
 }
 
+
+- (void) doneAction:(UIButton*) button {
+    
+    if (self.nameField.text.length <= 0
+        || self.emailField.text.length <= 0
+        || self.passwordField.text.length <= 0
+        || self.retypePasswordField.text.length <= 0) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                       message:@"All fields are required!"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+        [alert addAction:actionOk];
+        [self presentViewController:alert animated:YES completion:nil];
+        self.doneButton.enabled = NO;
+        return;
+    }
+    
+    // create ui activity indicator
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [self.view addSubview:activityIndicator];
+    
+    // Create new user
+    [[FIRAuth auth] createUserWithEmail:self.emailField.text
+                               password:self.passwordField.text
+                             completion:^(FIRUser *user, NSError *error) {
+                                 
+                                 [activityIndicator startAnimating];
+                                 
+                                 if (!error) {
+                                     [activityIndicator stopAnimating];
+                                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Success!"
+                                                                                                    message:@"Your account is created"
+                                                                                             preferredStyle:UIAlertControllerStyleAlert];
+                                     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                        style:UIAlertActionStyleDefault
+                                                                                      handler:^(UIAlertAction * action){
+                                                                                          CustomerListViewController* vc = [[CustomerListViewController alloc] init];
+                                                                                          [self.navigationController pushViewController:vc animated:YES];}];
+                                     [alert addAction:actionOk];
+                                     [self presentViewController:alert animated:YES completion:nil];
+                                 } else {
+                                     [activityIndicator stopAnimating];
+                                     UIAlertController *alert = [UIAlertController
+                                                                 alertControllerWithTitle:@"Failed"
+                                                                 message:[error localizedDescription]
+                                                                 preferredStyle:UIAlertControllerStyleAlert];
+                                     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                        style:UIAlertActionStyleDefault
+                                                                                      handler:nil];
+                                     [alert addAction:actionOk];
+                                     [self presentViewController:alert animated:YES completion:nil];
+                                 }
+                             }];
+}
 
 @end

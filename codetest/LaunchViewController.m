@@ -23,12 +23,12 @@ static NSString* passwordPlaceholder = @" Password";
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES];   //it hides
+    [self.navigationController setNavigationBarHidden:YES];   //it hides nav bar
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO];    // it shows
+    [self.navigationController setNavigationBarHidden:NO];    // it shows nav bar
 }
 
 - (void)viewDidLoad {

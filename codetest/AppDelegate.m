@@ -25,9 +25,9 @@
     
     [FIRApp configure];
     
+    // If User is signed in go directly to Customer List View
     FIRUser *user = [FIRAuth auth].currentUser;
     if (user != nil) {
-        // User is signed in.
         UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         CustomerListViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"CustomerListViewController"];
         UINavigationController *navController = [storyboard instantiateViewControllerWithIdentifier:@"UINavigationController"];

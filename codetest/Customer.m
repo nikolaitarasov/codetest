@@ -22,9 +22,6 @@
         _lastName = [customersDictionary valueForKey:@"lastName"];
         _dateOfBirth = [customersDictionary valueForKey:@"dateOfBirth"];
         _zipcode = [customersDictionary valueForKey:@"zipcode"];
-        
-        FIRDatabaseReference* databaseRef = [FirebaseDatabaseManager sharedReference];
-        _customerRef = [databaseRef child:customerKey];
     }
     return self;
 }

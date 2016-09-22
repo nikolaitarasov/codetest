@@ -18,8 +18,6 @@
 @property(retain, nonatomic) UITextField* dateOfBirthField;
 @property(retain, nonatomic) UITextField* zipcodeField;
 @property(retain, nonatomic) UIBarButtonItem* saveButton;
-@property(retain, nonatomic) UIView* cellView;
-@property(retain, nonatomic) NSIndexPath* indexPathOfSelectedCell;
 @property (assign, nonatomic) BOOL editingCustomerInfo;
 @property(strong, nonatomic) NSString* customerKey;
 @property (retain, nonatomic) CustomerListViewController* tvc;
