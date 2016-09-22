@@ -303,6 +303,7 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
     int textSize = 16; // by default
     
     if ([textField isEqual:self.zipcodeField]) {
@@ -328,10 +329,11 @@
             textField.text = str;
         }
     }
-    if (textField.text.length >= textSize) {
+    
+    if(range.length + range.location > textField.text.length){
         return NO;
     }
-    return YES;
+    return newLength <= textSize;
 }
 
 
