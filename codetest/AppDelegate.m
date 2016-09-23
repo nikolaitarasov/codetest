@@ -21,7 +21,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:(33.0/255.0) green:(215.0/255.0) blue:(168.0/255.0) alpha:1.0]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:(45.0/255.0) green:(152.0/255.0) blue:(231.0/255.0) alpha:1.0]];
     
     [FIRApp configure];
     

@@ -34,9 +34,14 @@ static NSString* passwordPlaceholder = @" Password";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // set background color for main view
-    [self.view setBackgroundColor:
-     [UIColor colorWithRed:(33.0/255.0) green:(215.0/255.0) blue:(168.0/255.0) alpha:1.0]];
+    // set background image
+    UIImage *image = [UIImage imageNamed:@"launch_image.jpg"];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y,
+                                 image.size.width, image.size.height);
+    imageView.frame = self.view.bounds;
+    [imageView setUserInteractionEnabled:YES];
+    [self.view addSubview:imageView];
     
     // create title label
     UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(
@@ -44,12 +49,12 @@ static NSString* passwordPlaceholder = @" Password";
     label.text = @"Customer List";
     label.font = [UIFont fontWithName:@"AvenirNext-Bold" size:40];
     label.textColor = [UIColor whiteColor];
-    [self.view addSubview:label];
+    [imageView addSubview:label];
     
     // create login fields
     [self createLoginFields];
-    [self.view addSubview: self.emailField];
-    [self.view addSubview: self.passwordField];
+    [imageView addSubview: self.emailField];
+    [imageView addSubview: self.passwordField];
     [[UITextField appearance] setTintColor:[UIColor blackColor]];
     
     // create button 'Login'
@@ -60,10 +65,14 @@ static NSString* passwordPlaceholder = @" Password";
     loginButton.clipsToBounds = YES;
     loginButton.titleLabel.font = [UIFont boldSystemFontOfSize: 26];
     [loginButton setTitleColor:([UIColor whiteColor]) forState:UIControlStateNormal];
-    [loginButton setBackgroundColor:[UIColor colorWithRed:(2.0/255.0) green:(124.0/255.0) blue:(62.0/255.0) alpha:1.0]];
+    CALayer *layer = loginButton.layer;
+    layer.backgroundColor = [[UIColor clearColor] CGColor];
+    layer.borderColor = [[UIColor whiteColor] CGColor];
+    layer.cornerRadius = 8.0f;
+    layer.borderWidth = 1.0f;
     [loginButton addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
     loginButton.userInteractionEnabled = YES;
-    [self.view addSubview:loginButton];
+    [imageView addSubview:loginButton];
     
     // create button 'Create new account'
     UIButton *createAccountButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -75,7 +84,7 @@ static NSString* passwordPlaceholder = @" Password";
     [createAccountButton titleColorForState:UIControlStateNormal];
     [createAccountButton addTarget:self action:@selector(createAccountAction:) forControlEvents:UIControlEventTouchUpInside];
     createAccountButton.userInteractionEnabled = YES;
-    [self.view addSubview:createAccountButton];
+    [imageView addSubview:createAccountButton];
 }
 
 - (void)didReceiveMemoryWarning {

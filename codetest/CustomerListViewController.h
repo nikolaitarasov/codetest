@@ -10,7 +10,10 @@
 
 @import FirebaseDatabase;
 
-@interface CustomerListViewController : UITableViewController
+@interface CustomerListViewController : UITableViewController <UISearchResultsUpdating> 
+@property (nonatomic, strong) NSMutableArray* customers;
+
+- (id) init;
 
 @end
 

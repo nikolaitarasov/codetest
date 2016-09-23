@@ -104,9 +104,13 @@
         cell.detailTextLabel.font = [UIFont fontWithName:@"Italic" size:18];
     }
     
-    NSArray * cellText = @[@"First name", @"Last name", @"Date of Birth", @"Zipcode"];
+    NSArray * cellText = @[@"First name", @"Last name", @"Date of Birth", @"Zipcode", @"Type of the service"];
     
     for (int i = 0; i < 4; i++) {
+        /*if (i == 4) {
+            // will add code later
+            break;
+        }*/
         if (indexPath.row == i) {
             UITextField *tf = (UITextField*)cell.accessoryView;
             tf = [self.UIElements objectAtIndex:i];

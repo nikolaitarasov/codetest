@@ -67,6 +67,11 @@ static NSString* retypePasswordPlaceholder = @"Retype password";
     return 45.f;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    NSString* title = @"User information";
+    return title;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 45.f;
 }
@@ -77,7 +82,7 @@ static NSString* retypePasswordPlaceholder = @"Retype password";
     if (cell == nil) {
         cell = [[UITableViewCell alloc]
                 initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
-        cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
+        cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:16];
     }
     
     if (indexPath.section == 0) {
