@@ -143,19 +143,15 @@ NSMutableArray* customers;
         // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
+        // play sound effect
+        NSString *path  = [[NSBundle mainBundle] pathForResource:@"Clean_Paper_Rip" ofType:@"mp3"];
+        NSURL *pathURL = [NSURL fileURLWithPath: path];
+        SystemSoundID audioEffect;
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef) pathURL, &audioEffect);
+        AudioServicesPlaySystemSound(audioEffect);
+        
         // Request table view to reload
         [tableView reloadData];
-        
-        // play sound effect
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            dispatch_async(dispatch_get_main_queue(), ^(void){
-                NSString *path  = [[NSBundle mainBundle] pathForResource:@"Clean_Paper_Rip" ofType:@"mp3"];
-                NSURL *pathURL = [NSURL fileURLWithPath: path];
-                SystemSoundID audioEffect;
-                AudioServicesCreateSystemSoundID((__bridge CFURLRef) pathURL, &audioEffect);
-                AudioServicesPlaySystemSound(audioEffect);
-            });
-        });
     }
 }
 

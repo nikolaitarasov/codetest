@@ -318,15 +318,11 @@
     [[childRef child:@"zipcode"] setValue:zipcode];
     
     // play sound effect
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        dispatch_async(dispatch_get_main_queue(), ^(void){
-            NSString *path  = [[NSBundle mainBundle] pathForResource:@"glass_ping" ofType:@"mp3"];
-            NSURL *pathURL = [NSURL fileURLWithPath: path];
-            SystemSoundID audioEffect;
-            AudioServicesCreateSystemSoundID((__bridge CFURLRef) pathURL, &audioEffect);
-            AudioServicesPlaySystemSound(audioEffect);
-        });
-    });
+    NSString *path  = [[NSBundle mainBundle] pathForResource:@"glass_ping" ofType:@"mp3"];
+    NSURL *pathURL = [NSURL fileURLWithPath: path];
+    SystemSoundID audioEffect;
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef) pathURL, &audioEffect);
+    AudioServicesPlaySystemSound(audioEffect);
     
     // switch to view with list of customers
     NSUInteger index = [self.navigationController.viewControllers indexOfObject:self];
