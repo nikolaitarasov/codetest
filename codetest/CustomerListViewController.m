@@ -151,6 +151,7 @@ UISearchController *searchController;
     if (self.customers.count != 0) {
         [self configureCell:cell atIndexPath:indexPath];
     }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
@@ -222,7 +223,14 @@ UISearchController *searchController;
 
 - (AddNewCustomerTableViewController*) addNewCustomerAction:(UIBarButtonItem*) button {
     AddNewCustomerTableViewController* vc = [[AddNewCustomerTableViewController alloc] initWithFirstName:nil lastName:nil dateOfBirth:nil zipcode:nil key:nil title:nil];
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    vc.navController = [[UINavigationController alloc] initWithRootViewController:vc];
+    [vc.navController.navigationBar
+     setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    vc.navController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    //now present this navigation controller modally
+    [self presentViewController:vc.navController animated:YES completion:nil];
     return vc;
 }
 

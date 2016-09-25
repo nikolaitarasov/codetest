@@ -46,7 +46,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.tableView.delegate = self;
     
     [self.navigationController.navigationBar
@@ -328,14 +327,24 @@
     AudioServicesCreateSystemSoundID((__bridge CFURLRef) pathURL, &audioEffect);
     AudioServicesPlaySystemSound(audioEffect);
     
-    // switch to view with list of customers
-    NSUInteger index = [self.navigationController.viewControllers indexOfObject:self];
-    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index - 1] animated:YES];
+    // go back to view with list of customers
+    if (self.editingCustomerInfo) {
+        NSUInteger index = [self.navigationController.viewControllers indexOfObject:self];
+        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index - 1] animated:YES];
+
+    } else {
+        [self.navController dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (void) cancelAction:(UIButton*) button {
-    NSUInteger index = [self.navigationController.viewControllers indexOfObject:self];
-    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index - 1] animated:YES];
+    if (self.editingCustomerInfo) {
+        NSUInteger index = [self.navigationController.viewControllers indexOfObject:self];
+        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index - 1] animated:YES];
+
+    } else {
+        [self.navController dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 

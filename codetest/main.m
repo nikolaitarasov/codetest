@@ -2,7 +2,7 @@
 //  main.m
 //  codetest
 //
-//  Created by Mykola Tarasov on 9/12/16.
+//  Created by Nikolai Tarasov on 9/12/16.
 //  Copyright © 2016 Nikolai Tarasov. All rights reserved.
 //
 
