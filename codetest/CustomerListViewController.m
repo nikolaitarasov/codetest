@@ -67,7 +67,7 @@ FIRDatabaseReference* databaseRef;
     // get current firebase user
     FIRUser *user = [FIRAuth auth].currentUser;
     
-    // add title label
+    // add title
     UILabel *emailTitleLabel = [[UILabel alloc] init];
     emailTitleLabel.text = user.email;
     emailTitleLabel.text = [NSString stringWithFormat:@"Logged user: %@", user.email];
