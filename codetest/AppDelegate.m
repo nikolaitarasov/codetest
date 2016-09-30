@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "CustomerListViewController.h"
+#import "ProfileTableViewController.h"
 
 @interface AppDelegate ()
 
@@ -26,17 +27,22 @@
     [FIRApp configure];
     
     // If User is signed in go directly to Customer List View
-    FIRUser *user = [FIRAuth auth].currentUser;
+    /*FIRUser *user = [FIRAuth auth].currentUser;
     if (user != nil) {
         UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        CustomerListViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"CustomerListViewController"];
-        UINavigationController *navController = [storyboard instantiateViewControllerWithIdentifier:@"UINavigationController"];
-        navController = [navController initWithRootViewController:vc];
-        [navController.navigationBar
+        UITabBarController* tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"UITabBarController"];
+        CustomerListViewController* vc1 = [[CustomerListViewController alloc] init];
+        ProfileTableViewController* vc2 = [[ProfileTableViewController alloc] init];
+        UINavigationController *firstNavigationController = [storyboard instantiateViewControllerWithIdentifier:@"UINavigationController2"];
+        UINavigationController *secondNavigationController = [[UINavigationController alloc] initWithRootViewController:vc2];
+        [firstNavigationController.navigationBar
          setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-        navController.navigationBar.tintColor = [UIColor whiteColor];
-        self.window.rootViewController = navController;
-    }
+        [secondNavigationController.navigationBar
+         setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+        [tabBarController setViewControllers:@[firstNavigationController, secondNavigationController] animated:NO];
+        tabBarController.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        self.window.rootViewController = tabBarController;
+    }*/
     return YES;
 }
 

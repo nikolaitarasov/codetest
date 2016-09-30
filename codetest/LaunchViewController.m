@@ -9,6 +9,7 @@
 #import "LaunchViewController.h"
 #import "CreateAccountViewController.h"
 #import "CustomerListViewController.h"
+#import "AppDelegate.h"
 
 @import Firebase;
 
@@ -23,16 +24,18 @@ static NSString* passwordPlaceholder = @" Password";
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES];   //it hides nav bar
+    [self prefersStatusBarHidden];
+    self.tabBarController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO];    // it shows nav bar
+    self.tabBarController.hidesBottomBarWhenPushed = NO;
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
     
     // set background image
     UIImage *image = [UIImage imageNamed:@"launch_image.jpg"];
@@ -208,7 +211,7 @@ static NSString* passwordPlaceholder = @" Password";
                 [self presentViewController:alert animated:YES completion:nil];
             }
         }
-        if (password.length < 8) {
+        if (password.length < 4) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
                                                         message:@"Password must be greater than 8 characters!"
                                                  preferredStyle:UIAlertControllerStyleAlert];
@@ -231,8 +234,8 @@ static NSString* passwordPlaceholder = @" Password";
                                      dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
                                          //Background Thread
                                          dispatch_async(dispatch_get_main_queue(), ^(void){
-                                             CustomerListViewController* vc = [[CustomerListViewController alloc] init];
-                                             [self.navigationController pushViewController:vc animated:YES];
+                                             UITabBarController* tabBarController = [self.storyboard instantiateViewControllerWithIdentifier:@"UITabBarController"];
+                                             [self.navigationController pushViewController:tabBarController animated:YES];
                                          });
                                      });
                                      
@@ -261,6 +264,10 @@ static NSString* passwordPlaceholder = @" Password";
     CreateAccountViewController* vc =
                             [self.storyboard instantiateViewControllerWithIdentifier:@"CreateAccountViewController"];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
 }
 
 @end

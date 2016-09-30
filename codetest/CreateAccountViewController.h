@@ -10,7 +10,6 @@
 
 @interface CreateAccountViewController : UITableViewController <UITableViewDelegate,UITableViewDataSource, UITextFieldDelegate>
 
-@property (retain, nonatomic) UITextField *nameField;
 @property (retain, nonatomic) UITextField *emailField;
 @property (retain, nonatomic) UITextField *passwordField;
 @property (retain, nonatomic) UITextField *retypePasswordField;

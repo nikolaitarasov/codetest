@@ -21,7 +21,6 @@
 @property (assign, nonatomic) BOOL editingCustomerInfo;
 @property(strong, nonatomic) NSString* customerKey;
 @property (retain, nonatomic) CustomerListViewController* tvc;
-@property(retain, nonatomic) UINavigationController *navController;
 
 -(id) initWithFirstName:(NSString*) firstName lastName:(NSString*) lastName dateOfBirth:(NSString*) dateOfBirth zipcode:(NSString*) zipcode key:(NSString*) key title:(NSString*) title;
 - (NSMutableArray*) createNameFields;

@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		5839015A88FA81DB849F34BB /* libPods-codetest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3588E8A4E82C52422CE02B8 /* libPods-codetest.a */; };
+		5B40C3361D9CCD35004886B2 /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B40C3351D9CCD35004886B2 /* ProfileTableViewController.m */; };
+		5B40C3381D9E10D9004886B2 /* list-simple-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B40C3371D9E10D9004886B2 /* list-simple-7.png */; };
+		5B40C33A1D9E111D004886B2 /* circle-user-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B40C3391D9E111D004886B2 /* circle-user-7.png */; };
 		5B612E8D1D94DFA900244CEC /* launch_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5B612E8C1D94DFA900244CEC /* launch_image.jpg */; };
-		5B612E901D94EDD200244CEC /* SearchResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B612E8F1D94EDD200244CEC /* SearchResultsTableViewController.m */; };
 		5BEA6A811D87A63C004022B5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEA6A801D87A63C004022B5 /* main.m */; };
 		5BEA6A841D87A63C004022B5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEA6A831D87A63C004022B5 /* AppDelegate.m */; };
 		5BEA6A8A1D87A63C004022B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BEA6A881D87A63C004022B5 /* Main.storyboard */; };
@@ -52,9 +54,11 @@
 /* Begin PBXFileReference section */
 		118A469DDF782503789E0A40 /* Pods-codetestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-codetestTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-codetestTests/Pods-codetestTests.debug.xcconfig"; sourceTree = "<group>"; };
 		28C0097576B5CB20D2EE1B0B /* Pods-codetestUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-codetestUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-codetestUITests/Pods-codetestUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		5B40C3341D9CCD35004886B2 /* ProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileTableViewController.h; sourceTree = "<group>"; };
+		5B40C3351D9CCD35004886B2 /* ProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileTableViewController.m; sourceTree = "<group>"; };
+		5B40C3371D9E10D9004886B2 /* list-simple-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "list-simple-7.png"; path = "../../../Downloads/iconbeast-lite-200/iconbeast lite 200 - png/list-simple-7.png"; sourceTree = "<group>"; };
+		5B40C3391D9E111D004886B2 /* circle-user-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "circle-user-7.png"; path = "../../../Downloads/iconbeast-lite-200/iconbeast lite 200 - png/circle-user-7.png"; sourceTree = "<group>"; };
 		5B612E8C1D94DFA900244CEC /* launch_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = launch_image.jpg; sourceTree = "<group>"; };
-		5B612E8E1D94EDD100244CEC /* SearchResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsTableViewController.h; sourceTree = "<group>"; };
-		5B612E8F1D94EDD200244CEC /* SearchResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsTableViewController.m; sourceTree = "<group>"; };
 		5BEA6A7C1D87A63C004022B5 /* codetest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = codetest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BEA6A801D87A63C004022B5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5BEA6A821D87A63C004022B5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -168,10 +172,10 @@
 				5BEA6ABD1D87B3DB004022B5 /* CreateAccountViewController.m */,
 				5BEA6AC41D87B420004022B5 /* CustomerListViewController.h */,
 				5BEA6AC51D87B420004022B5 /* CustomerListViewController.m */,
-				5B612E8E1D94EDD100244CEC /* SearchResultsTableViewController.h */,
-				5B612E8F1D94EDD200244CEC /* SearchResultsTableViewController.m */,
 				5BEA6AC81D87C88B004022B5 /* AddNewCustomerTableViewController.h */,
 				5BEA6AC91D87C88B004022B5 /* AddNewCustomerTableViewController.m */,
+				5B40C3341D9CCD35004886B2 /* ProfileTableViewController.h */,
+				5B40C3351D9CCD35004886B2 /* ProfileTableViewController.m */,
 				5BEA6ACE1D8E39FF004022B5 /* Customer.h */,
 				5BEA6ACF1D8E39FF004022B5 /* Customer.m */,
 				5BEA6A881D87A63C004022B5 /* Main.storyboard */,
@@ -183,6 +187,8 @@
 				5BEA6AE01D9253C8004022B5 /* glass_ping.mp3 */,
 				5BEA6AE21D9256B4004022B5 /* Clean_Paper_Rip.mp3 */,
 				5B612E8C1D94DFA900244CEC /* launch_image.jpg */,
+				5B40C3371D9E10D9004886B2 /* list-simple-7.png */,
+				5B40C3391D9E111D004886B2 /* circle-user-7.png */,
 				5BEA6A7F1D87A63C004022B5 /* Supporting Files */,
 			);
 			path = codetest;
@@ -300,7 +306,7 @@
 				TargetAttributes = {
 					5BEA6A7B1D87A63C004022B5 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 6V642954LL;
+						DevelopmentTeam = 9KTNDX587K;
 					};
 					5BEA6A941D87A63C004022B5 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -338,10 +344,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BEA6AB71D87AC99004022B5 /* GoogleService-Info.plist in Resources */,
+				5B40C3381D9E10D9004886B2 /* list-simple-7.png in Resources */,
 				5BEA6A8C1D87A63C004022B5 /* Assets.xcassets in Resources */,
 				5B612E8D1D94DFA900244CEC /* launch_image.jpg in Resources */,
 				5BEA6A8A1D87A63C004022B5 /* Main.storyboard in Resources */,
 				5BEA6AE31D9256B4004022B5 /* Clean_Paper_Rip.mp3 in Resources */,
+				5B40C33A1D9E111D004886B2 /* circle-user-7.png in Resources */,
 				5BEA6AE11D9253C8004022B5 /* glass_ping.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -495,8 +503,8 @@
 				5BEA6ACA1D87C88B004022B5 /* AddNewCustomerTableViewController.m in Sources */,
 				5BEA6AD01D8E39FF004022B5 /* Customer.m in Sources */,
 				5BEA6ABE1D87B3DB004022B5 /* CreateAccountViewController.m in Sources */,
+				5B40C3361D9CCD35004886B2 /* ProfileTableViewController.m in Sources */,
 				5BEA6A841D87A63C004022B5 /* AppDelegate.m in Sources */,
-				5B612E901D94EDD200244CEC /* SearchResultsTableViewController.m in Sources */,
 				5BEA6A811D87A63C004022B5 /* main.m in Sources */,
 				5BEA6ABC1D87B307004022B5 /* LaunchViewController.m in Sources */,
 				5BEA6ACD1D8B6DBC004022B5 /* FirebaseDatabaseManager.m in Sources */,
@@ -638,6 +646,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEPLOYMENT_LOCATION = NO;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = codetest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nt.codetest;
@@ -658,6 +667,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEPLOYMENT_LOCATION = NO;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = codetest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;

@@ -11,7 +11,6 @@
 #import "AddNewCustomerTableViewController.h"
 #import "FirebaseDatabaseManager.h"
 #import "Customer.h"
-#import "SearchResultsTableViewController.h"
 
 @import Firebase;
 
@@ -22,20 +21,6 @@
 @implementation CustomerListViewController
 
 FIRDatabaseReference* databaseRef;
-
-NSArray *originalData;
-NSMutableArray *searchData;
-UISearchBar *searchBar;
-UISearchController *searchController;
-
-- (id) init {
-    self = [super init];
-    if (self) {
-        originalData = self.customers;
-        searchData = [[NSMutableArray alloc] init];
-    }
-    return self;
-}
 
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -90,16 +75,7 @@ UISearchController *searchController;
     emailTitleLabel.font = [UIFont boldSystemFontOfSize:16.0];
     emailTitleLabel.textAlignment = NSTextAlignmentCenter;
     [emailTitleLabel sizeToFit];
-    self.navigationItem.titleView = emailTitleLabel;
-    
-    // add search functionality
-    UINavigationController *searchResultsController = [[self storyboard] instantiateViewControllerWithIdentifier:@"TableSearchResultsNavigationController"];
-    searchController = [[UISearchController alloc] initWithSearchResultsController:searchResultsController];
-    searchController.searchResultsUpdater = self;
-    //searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 70, 320, 44)];
-    searchController.searchBar.barTintColor = [UIColor colorWithRed:(45.0/255.0) green:(152.0/255.0) blue:(231.0/255.0) alpha:1.0];
-    self.tableView.tableHeaderView = searchController.searchBar;
-
+    self.tabBarController.navigationItem.titleView = emailTitleLabel;
     
     // add UIBarButton items
     UIBarButtonItem* addNewCustomerButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:
@@ -107,15 +83,13 @@ UISearchController *searchController;
                                                                           target:self
                                                                           action:@selector(addNewCustomerAction:)];
     
-    UIBarButtonItem* logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"Logout"
-                                                                    style: UIBarButtonItemStylePlain
-                                                                    target:self
-                                                                    action:@selector(logoutAction:)];
+    UIBarButtonItem* editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit"
+                                                                        style: UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(editAction:)];
     
-    self.navigationItem.rightBarButtonItem = addNewCustomerButton;
-    self.navigationItem.leftBarButtonItem = logoutButton;
-    
-    self.navigationItem.hidesBackButton = YES;
+    self.tabBarController.navigationItem.rightBarButtonItem = addNewCustomerButton;
+    self.tabBarController.navigationItem.leftBarButtonItem = editButton;
     
     // check for updates in table view
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -197,25 +171,10 @@ UISearchController *searchController;
     NSString* fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
     
     AddNewCustomerTableViewController* vc = [[AddNewCustomerTableViewController alloc] initWithFirstName:firstName lastName:lastName dateOfBirth:dateOfBirth zipcode:zipcode key:key title:fullName];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-
-#pragma mark - UISearchControllerDelegate & UISearchResultsDelegate
-
-- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-    
-    NSString *searchString = searchController.searchBar.text;
-    
-    [self updateFilteredContentForSearchText:searchString];
-    
-    if (searchController.searchResultsController) {
-        
-        UINavigationController *navController = (UINavigationController *)searchController.searchResultsController;
-        SearchResultsTableViewController *vc = (SearchResultsTableViewController *)navController.topViewController;
-        vc.searchResults = searchData;
-        [vc.tableView reloadData];
-    }
+    [vc.navigationController.navigationBar
+     setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    vc.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.tabBarController.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -224,25 +183,15 @@ UISearchController *searchController;
 - (AddNewCustomerTableViewController*) addNewCustomerAction:(UIBarButtonItem*) button {
     AddNewCustomerTableViewController* vc = [[AddNewCustomerTableViewController alloc] initWithFirstName:nil lastName:nil dateOfBirth:nil zipcode:nil key:nil title:nil];
     
-    vc.navController = [[UINavigationController alloc] initWithRootViewController:vc];
-    [vc.navController.navigationBar
-     setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-    vc.navController.navigationBar.tintColor = [UIColor whiteColor];
+    UINavigationController* navController = [[UINavigationController alloc]
+                                                 initWithRootViewController:vc];
+    [navController.navigationBar
+        setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    navController.navigationBar.tintColor = [UIColor whiteColor];
     
     //now present this navigation controller modally
-    [self presentViewController:vc.navController animated:YES completion:nil];
+    [self presentViewController:navController animated:YES completion:nil];
     return vc;
-}
-
-
--(void)logoutAction:(id) sender {
-    NSError *error;
-    [[FIRAuth auth] signOut:&error];
-    if (!error) {
-
-        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:0] animated:YES];
-    }
-
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
@@ -281,27 +230,15 @@ UISearchController *searchController;
 }
 
 
-- (void)updateFilteredContentForSearchText:(NSString *)searchText {
-    
-    if (searchText == nil) {
-        
-        searchData = [self.customers mutableCopy];
-        
+- (void) editAction:(UIBarButtonItem*) button {
+    if (self.tableView.editing) {
+        self.tableView.editing = NO;
+        button.title = @"Edit";
     } else {
-        
-        NSMutableArray *searchResults = [[NSMutableArray alloc] init];
-        
-        for (Customer* customer in self.customers) {
-            NSString* firstName = customer.firstName;
-            NSString* lastName = customer.lastName;
-            NSString* fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
-            
-            if ([fullName containsString:searchText]) {
-                [searchResults addObject:fullName];
-            }
-            searchData = searchResults;
-        }
+        self.tableView.editing = YES;
+        button.title = @"Done";
     }
 }
+
 
 @end

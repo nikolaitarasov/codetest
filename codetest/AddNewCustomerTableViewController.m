@@ -48,8 +48,8 @@
     [super viewDidLoad];
     self.tableView.delegate = self;
     
-    [self.navigationController.navigationBar
-     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    [self.tabBarController.navigationController.navigationBar
+     setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
     
     _tvc = [[CustomerListViewController alloc] init];
     
@@ -103,13 +103,9 @@
         cell.detailTextLabel.font = [UIFont fontWithName:@"Italic" size:18];
     }
     
-    NSArray * cellText = @[@"First name", @"Last name", @"Date of Birth", @"Zipcode", @"Type of the service"];
+    NSArray * cellText = @[@"First name", @"Last name", @"Date of Birth", @"Zipcode"];
     
     for (int i = 0; i < 4; i++) {
-        /*if (i == 4) {
-            // will add code later
-            break;
-        }*/
         if (indexPath.row == i) {
             UITextField *tf = (UITextField*)cell.accessoryView;
             tf = [self.UIElements objectAtIndex:i];
@@ -145,7 +141,7 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     textField.placeholder = @"";
-    self.saveButton.enabled = NO;
+    self.saveButton.enabled = YES;
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
@@ -333,7 +329,7 @@
         [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index - 1] animated:YES];
 
     } else {
-        [self.navController dismissViewControllerAnimated:YES completion:nil];
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
@@ -343,7 +339,7 @@
         [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index - 1] animated:YES];
 
     } else {
-        [self.navController dismissViewControllerAnimated:YES completion:nil];
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
