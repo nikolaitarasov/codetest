@@ -21,36 +21,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    NSLog(@"3view = %@", self.navigationController);
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
     self.UIElements = [[NSMutableArray alloc] init];
     self.UIElements = [self createNameFields];
     
+    // fill email field
     FIRUser *user = [FIRAuth auth].currentUser;
-    
     self.emailField.text = user.email;
     
-    UILabel *title = [[UILabel alloc] init];
-    title.text = @"Profile";
-    title.textColor = [UIColor whiteColor];
-    title.font = [UIFont boldSystemFontOfSize:16.0];
-    title.textAlignment = NSTextAlignmentCenter;
-    [title sizeToFit];
-    self.tabBarController.navigationItem.titleView = title;
+    // add title
+    UILabel *titleLabel = [[UILabel alloc] init];
+    titleLabel.text = @"My Profile";
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.font = [UIFont boldSystemFontOfSize:16.0];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    [titleLabel sizeToFit];
+    self.navigationItem.titleView = titleLabel;
     
     self.saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
                                                                     target:self
-                                                                    action:@selector(saveAction:)];
+                                                                    action:@selector(saveUpdatesAction:)];
     
     UIBarButtonItem* logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"Logout"
                                                                      style: UIBarButtonItemStylePlain
                                                                     target:self
                                                                     action:@selector(logoutAction:)];
     
-    self.tabBarController.navigationItem.rightBarButtonItem = self.saveButton;
-    self.tabBarController.navigationItem.leftBarButtonItem = logoutButton;
+    self.navigationItem.rightBarButtonItem = self.saveButton;
+    self.navigationItem.leftBarButtonItem = logoutButton;
     
     _defaultFont = [UIFont fontWithName:@"Helvetica" size:16];
     self.saveButton.enabled = NO;
@@ -101,12 +102,12 @@
         } else if (indexPath.row == 1) {
             UITextField *tf = (UITextField*)cell.accessoryView;
             tf = [self.UIElements objectAtIndex:1];
-            cell.textLabel.text = @"Password";
+            cell.textLabel.text = @"Update password";
             cell.accessoryView = cell.editingAccessoryView = tf;
         } else if (indexPath.row == 2) {
             UITextField *tf = (UITextField*)cell.accessoryView;
             tf = [self.UIElements objectAtIndex:2];
-            cell.textLabel.text = @"Retype password";
+            cell.textLabel.text = @"Retype new password";
             cell.accessoryView = cell.editingAccessoryView = tf;
         }
     }
@@ -230,7 +231,7 @@
     
 }
 
-- (void) saveAction:(id) sender {
+- (void)saveUpdatesAction:(id) sender {
     FIRUser *user = [FIRAuth auth].currentUser;
     
     NSString* email = self.emailField.text;
@@ -274,6 +275,8 @@
         }];
     }
     self.saveButton.enabled = NO;
+    self.passwordField.text = @"";
+    self.retypePasswordField.text = @"";
 }
 
 @end

@@ -28,7 +28,7 @@ static NSString* retypePasswordPlaceholder = @"Retype password";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self.navigationController setNavigationBarHidden:NO];
     self.title = @"Create new account";
     [self.navigationController.navigationBar
      setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
@@ -130,6 +130,9 @@ static NSString* retypePasswordPlaceholder = @"Retype password";
     textField.placeholder = @"";
     textField.borderStyle = UITextBorderStyleRoundedRect;
     self.doneButton.enabled = NO;
+    if ([textField isEqual:self.retypePasswordField]) {
+        self.doneButton.enabled = YES;
+    }
 }
 
 
@@ -263,6 +266,7 @@ static NSString* retypePasswordPlaceholder = @"Retype password";
                                                                                         style:UIAlertActionStyleDefault
                                                                                       handler:^(UIAlertAction * action){
                                                                                           UITabBarController* tabBarController = [self.storyboard instantiateViewControllerWithIdentifier:@"UITabBarController"];
+                                                                                          [self.navigationController setNavigationBarHidden:YES];
                                                                                           [self.navigationController pushViewController:tabBarController animated:YES];}];
                                      [alert addAction:actionOk];
                                      [self presentViewController:alert animated:YES completion:nil];

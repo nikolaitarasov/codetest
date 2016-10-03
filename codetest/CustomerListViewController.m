@@ -64,18 +64,14 @@ FIRDatabaseReference* databaseRef;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    // get current firebase user
-    FIRUser *user = [FIRAuth auth].currentUser;
-    
     // add title
-    UILabel *emailTitleLabel = [[UILabel alloc] init];
-    emailTitleLabel.text = user.email;
-    emailTitleLabel.text = [NSString stringWithFormat:@"Logged user: %@", user.email];
-    emailTitleLabel.textColor = [UIColor whiteColor];
-    emailTitleLabel.font = [UIFont boldSystemFontOfSize:16.0];
-    emailTitleLabel.textAlignment = NSTextAlignmentCenter;
-    [emailTitleLabel sizeToFit];
-    self.tabBarController.navigationItem.titleView = emailTitleLabel;
+    UILabel *titleLabel = [[UILabel alloc] init];
+    titleLabel.text = @"Customers";
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.font = [UIFont boldSystemFontOfSize:16.0];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    [titleLabel sizeToFit];
+    self.navigationItem.titleView = titleLabel;
     
     // add UIBarButton items
     UIBarButtonItem* addNewCustomerButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:
@@ -88,8 +84,8 @@ FIRDatabaseReference* databaseRef;
                                                                             target:self
                                                                             action:@selector(editAction:)];
     
-    self.tabBarController.navigationItem.rightBarButtonItem = addNewCustomerButton;
-    self.tabBarController.navigationItem.leftBarButtonItem = editButton;
+    self.navigationItem.rightBarButtonItem = addNewCustomerButton;
+    self.navigationItem.leftBarButtonItem = editButton;
     
     // check for updates in table view
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -171,10 +167,7 @@ FIRDatabaseReference* databaseRef;
     NSString* fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
     
     AddNewCustomerTableViewController* vc = [[AddNewCustomerTableViewController alloc] initWithFirstName:firstName lastName:lastName dateOfBirth:dateOfBirth zipcode:zipcode key:key title:fullName];
-    [vc.navigationController.navigationBar
-     setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-    vc.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    [self.tabBarController.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

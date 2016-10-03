@@ -37,7 +37,14 @@
             
             self.editingCustomerInfo = YES;
         }
-        self.title = [title length] == 0 ? @"Add new customer" : title;
+        // add title
+        self.titleLabel = [[UILabel alloc] init];
+        self.titleLabel.text = [title length] == 0 ? @"Add new customer" : title;
+        self.titleLabel.textColor = [UIColor whiteColor];
+        self.titleLabel.font = [UIFont boldSystemFontOfSize:16.0];
+        self.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [self.titleLabel sizeToFit];
+        self.navigationItem.titleView = self.titleLabel;
     }
     return self;
 }
@@ -47,9 +54,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.delegate = self;
-    
-    [self.tabBarController.navigationController.navigationBar
-     setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
     
     _tvc = [[CustomerListViewController alloc] init];
     
@@ -162,10 +166,10 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     NSString* firstName = self.firstNameField.text;
     NSString* lastName = self.lastNameField.text;
-    self.title = [firstName stringByAppendingString:[@" " stringByAppendingString: lastName]];
+    self.titleLabel.text = [firstName stringByAppendingString:[@" " stringByAppendingString: lastName]];
     if (self.firstNameField.text.length <= 0
         && self.lastNameField.text.length <= 0) {
-        self.title = @"Add new customer";
+        self.titleLabel.text = @"Add new customer";
     }
     if (self.firstNameField.text.length > 0
         && self.lastNameField.text.length > 0

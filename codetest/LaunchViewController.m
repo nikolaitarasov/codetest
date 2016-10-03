@@ -32,7 +32,6 @@ static NSString* passwordPlaceholder = @" Password";
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     self.tabBarController.hidesBottomBarWhenPushed = NO;
-    [self.navigationController setNavigationBarHidden:NO];
 }
 
 - (void)viewDidLoad {

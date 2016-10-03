@@ -170,11 +170,11 @@
             </objects>
             <point key="canvasLocation" x="1550" y="961"/>
         </scene>
-        <!--Cutomer List-->
+        <!--Customers List-->
         <scene sceneID="mKd-kP-qCv">
             <objects>
                 <navigationController storyboardIdentifier="UINavigationController2" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5fp-JQ-Qmr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Cutomer List" image="list-simple-7.png" id="Qyg-ub-dzA"/>
+                    <tabBarItem key="tabBarItem" title="Customers List" image="list-simple-7.png" id="Qyg-ub-dzA"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hDF-eE-oXa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
