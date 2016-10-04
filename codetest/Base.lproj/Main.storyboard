@@ -95,7 +95,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ll4-fc-Wht" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-812" y="-698"/>
+            <point key="canvasLocation" x="-164" y="-706"/>
         </scene>
         <!--Launch View Controller-->
         <scene sceneID="Suw-Z0-pYN">
@@ -232,7 +232,7 @@
         <image name="list-simple-7.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4Q3-5t-Mez"/>
+        <segue reference="tS4-eV-AaJ"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

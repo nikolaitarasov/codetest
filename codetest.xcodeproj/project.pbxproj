@@ -139,6 +139,25 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		5B40C33B1DA32866004886B2 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				5BEA6AE01D9253C8004022B5 /* glass_ping.mp3 */,
+				5BEA6AE21D9256B4004022B5 /* Clean_Paper_Rip.mp3 */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
+		5B40C33C1DA328A5004886B2 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				5B612E8C1D94DFA900244CEC /* launch_image.jpg */,
+				5B40C3371D9E10D9004886B2 /* list-simple-7.png */,
+				5B40C3391D9E111D004886B2 /* circle-user-7.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		5BEA6A731D87A63C004022B5 = {
 			isa = PBXGroup;
 			children = (
@@ -178,17 +197,14 @@
 				5B40C3351D9CCD35004886B2 /* ProfileTableViewController.m */,
 				5BEA6ACE1D8E39FF004022B5 /* Customer.h */,
 				5BEA6ACF1D8E39FF004022B5 /* Customer.m */,
+				5BEA6ACB1D8B6DBC004022B5 /* FirebaseDatabaseManager.h */,
+				5BEA6ACC1D8B6DBC004022B5 /* FirebaseDatabaseManager.m */,
 				5BEA6A881D87A63C004022B5 /* Main.storyboard */,
 				5BEA6A8B1D87A63C004022B5 /* Assets.xcassets */,
 				5BEA6A901D87A63C004022B5 /* Info.plist */,
-				5BEA6ACB1D8B6DBC004022B5 /* FirebaseDatabaseManager.h */,
-				5BEA6ACC1D8B6DBC004022B5 /* FirebaseDatabaseManager.m */,
 				5BEA6AB61D87AC99004022B5 /* GoogleService-Info.plist */,
-				5BEA6AE01D9253C8004022B5 /* glass_ping.mp3 */,
-				5BEA6AE21D9256B4004022B5 /* Clean_Paper_Rip.mp3 */,
-				5B612E8C1D94DFA900244CEC /* launch_image.jpg */,
-				5B40C3371D9E10D9004886B2 /* list-simple-7.png */,
-				5B40C3391D9E111D004886B2 /* circle-user-7.png */,
+				5B40C33C1DA328A5004886B2 /* Images */,
+				5B40C33B1DA32866004886B2 /* Sounds */,
 				5BEA6A7F1D87A63C004022B5 /* Supporting Files */,
 			);
 			path = codetest;

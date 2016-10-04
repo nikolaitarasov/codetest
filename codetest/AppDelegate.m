@@ -26,23 +26,6 @@
     
     [FIRApp configure];
     
-    // If User is signed in go directly to Customer List View
-    /*FIRUser *user = [FIRAuth auth].currentUser;
-    if (user != nil) {
-        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UITabBarController* tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"UITabBarController"];
-        CustomerListViewController* vc1 = [[CustomerListViewController alloc] init];
-        ProfileTableViewController* vc2 = [[ProfileTableViewController alloc] init];
-        UINavigationController *firstNavigationController = [storyboard instantiateViewControllerWithIdentifier:@"UINavigationController2"];
-        UINavigationController *secondNavigationController = [[UINavigationController alloc] initWithRootViewController:vc2];
-        [firstNavigationController.navigationBar
-         setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-        [secondNavigationController.navigationBar
-         setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-        [tabBarController setViewControllers:@[firstNavigationController, secondNavigationController] animated:NO];
-        tabBarController.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-        self.window.rootViewController = tabBarController;
-    }*/
     return YES;
 }
 
